@@ -1,0 +1,39 @@
+{
+  "name": "blog-posts",
+  "description": "blog-posts",
+  "version": "1.0.0",
+  "author": "Himanshu <hsekhar1981@gmail.com>",
+  "dependencies": {
+    "config": "^1.30.0",
+    "gatsby": "^1.9.238",
+    "gatsby-cli": "^1.1.49",
+    "gatsby-link": "^1.6.39",
+    "gatsby-plugin-glamor": "^1.6.13",
+    "gatsby-plugin-react-helmet": "^2.0.8",
+    "gatsby-plugin-typography": "^1.7.18",
+    "gatsby-source-filesystem": "^1.5.27",
+    "gatsby-transformer-remark": "^1.7.37",
+    "glamorous": "^4.12.1",
+    "react-helmet": "^5.2.0",
+    "reactstrap": "^5.0.0",
+    "typeface-merriweather": "0.0.54",
+    "typeface-montserrat": "0.0.54",
+    "typography-theme-bootstrap": "^0.16.7",
+    "typography-theme-fairy-gates": "^0.15.11",
+    "typography-theme-kirkham": "^0.16.3",
+    "typography-theme-lawton": "^0.15.10"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "XXX",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write 'src/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "prettier": "^1.11.1"
+  }
+}
