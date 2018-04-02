@@ -7,7 +7,13 @@ import SocialContact from '../components/header-social-contact';
 import { rhythm } from "../utils/typography";
 import Header from '../components/header'
 
-import './includes/lib/bootstrap/css/bootstrap.min.css'
+import './includes/lib/bootstrap/css/bootstrap.min.css';
+// import './includes/lib/ionicons/css/ionicons.min.css';
+// import './includes/lib/animate/animate.min.css';
+// import './includes/lib/magnific-popup/magnific-popup.css';
+// import './includes/lib/owlcarousel/assets/owl.carousel.min.css';
+import './includes/lib/font-awesome/css/font-awesome.min.css';
+
 import './includes/css/style.css';
 
 const ListLink = props =>
