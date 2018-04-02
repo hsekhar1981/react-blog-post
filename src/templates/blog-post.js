@@ -3,8 +3,12 @@ import React from "react";
 export default ({ data }) => {
   const post = data.markdownRemark;
   return (
-    <div>
-       <div dangerouslySetInnerHTML={{ __html: post.html }} />
+     <div className="middle">
+      <div className="container">
+        <div className="col-md-9 content">
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        </div>
+      </div>
     </div>
   );
 };

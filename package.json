@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Himanshu <hsekhar1981@gmail.com>",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "config": "^1.30.0",
     "gatsby": "^1.9.238",
     "gatsby-cli": "^1.1.49",
