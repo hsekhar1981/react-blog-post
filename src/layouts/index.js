@@ -7,14 +7,13 @@ import SocialContact from '../components/header-social-contact';
 import { rhythm } from "../utils/typography";
 import Header from '../components/header'
 
-import './includes/lib/bootstrap/css/bootstrap.min.css';
-// import './includes/lib/ionicons/css/ionicons.min.css';
-// import './includes/lib/animate/animate.min.css';
-// import './includes/lib/magnific-popup/magnific-popup.css';
-// import './includes/lib/owlcarousel/assets/owl.carousel.min.css';
-import './includes/lib/font-awesome/css/font-awesome.min.css';
-
-import './includes/css/style.css';
+import './includes/css/bootstrap.min.css';
+import './includes/css/main.css';
+import './includes/css/animate.css';
+import './includes/css/owl.carousel.css';
+import './includes/css/owl.theme.css';
+import './includes/css/responsive.css';
+import './includes/css/font-awesome.min.css';
 
 const ListLink = props =>
   <li>
@@ -24,11 +23,24 @@ const ListLink = props =>
   </li>
 
 export default ({ children, data }) =>
-  <div>
-    <SocialContact />
-    <Header />
-    {children()}
-    <Footer />
+  <div className="wrapper">
+    <div id="content">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <SocialContact />
+            <Header />
+          </div>
+        </div>
+        <div className="mb-40"></div>
+        <div className="row">
+          <div className="col-md-12">
+            {children()}
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </div>
   </div>
 
 export const query = graphql`

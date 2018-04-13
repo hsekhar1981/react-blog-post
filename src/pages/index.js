@@ -1,48 +1,25 @@
 import React from "react";
-import g from "glamorous";
 import Link from "gatsby-link";
 import get from 'lodash/get';
-import Helmet from 'react-helmet';
-import { rhythm } from "../utils/typography";
+import fp from 'lodash/fp';
+import LatestBlogPosts from './latest-blog-posts';
+import LatestArticles from './latest-articles';
+import LatestResources from './resource-list';
 
 class BlogIndex extends React.Component {
 
   render() {
-
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
-
+    const resourceList = get(this, 'props.data.resources.edges')
+    const portfolios = fp.filter(fp.flow(
+      fp.get('node.frontmatter.type'),
+      fp.isEqual('res')
+    ))(resourceList);
+    console.log(portfolios);
     return (
       <div>
-        <main id="main">
-          <section id="blogs">
-            <div className="container">
-              <div className="section-header">
-                <h2>Blog</h2>
-                <p></p>
-              </div>
-              <div className="row">
-                {posts.map(({ node }) => {
-                  const title = get(node, 'frontmatter.title') || node.fields.slug
-                  return (
-                    <div className="col-lg-6" key={node.fields.slug}>
-                      <div className="box wow fadeInLeft">
-                        <div className="icon"><i className="fa fa-bar-chart"></i></div>
-                        <h4 className="title">
-                          <Link to={node.fields.slug}>
-                            {title}
-                          </Link>
-                        </h4>
-                        <p className="description"
-                          dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
-        </main>
+        <LatestArticles articles={this.props.data.latestArticles.edges} />
+        <LatestBlogPosts posts={this.props.data.latestBlogs.edges} />
+        {/* <LatestResources /> */}
       </div>
     )
   }
@@ -52,21 +29,67 @@ export default BlogIndex;
 
 export const query = graphql`
   query IndexQuery {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      totalCount
+
+    latestArticles: allMarkdownRemark(
+      sort: {order: DESC, fields: [frontmatter___date]}, 
+      filter: {fileAbsolutePath: {regex: "/(latest-articles)/.*\\.md$/"}}
+      ) {
       edges {
         node {
-          id
+          excerpt(pruneLength: 100)
           frontmatter {
+            type
             title
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "MMMM DD, YYYY")
           }
           fields {
             slug
           }
-          excerpt
         }
       }
     }
+    
+    latestBlogs: allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }, 
+      filter: {fileAbsolutePath: {regex: "/(latest-blogs)/.*\\.md$/"}}
+      ) {
+      edges {
+        node {
+          excerpt(pruneLength: 100)
+          frontmatter {
+            type
+            title
+            date(formatString: "MMMM DD, YYYY")
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+
+    resources: allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }, 
+      filter: {fileAbsolutePath: {regex: "/(resources)/.*\\.md$/"}}
+      ) {
+      edges {
+        node {
+          excerpt(pruneLength: 100)
+          frontmatter {
+            type
+            title
+            date(formatString: "MMMM DD, YYYY")
+            category
+            
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+
+
+
   }
 `

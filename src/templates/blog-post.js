@@ -6,6 +6,7 @@ export default ({ data }) => {
      <div className="middle">
       <div className="container">
         <div className="col-md-9 content">
+           <div >{post.frontmatter.title}</div>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
         </div>
       </div>
