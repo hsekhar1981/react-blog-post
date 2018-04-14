@@ -2,6 +2,7 @@
 title: High Performance JPA
 date: "2018-04-07"
 category: Java
+type: article
 ---
 
 ----

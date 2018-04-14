@@ -1,7 +1,8 @@
 ---
-title: High Performance JPA
+title: React Basics
 date: "2018-04-07"
 category: Java
+type: blog
 ---
 
 ----
@@ -12,6 +13,7 @@ category: Java
 
 <figure>
   <img src="https://placehold.it/350x150" alt="sample image">
+  <figcaption>This caption should be used to describe the image.</figcaption>
 </figure>
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.

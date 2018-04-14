@@ -2,24 +2,47 @@ import React from "react";
 import Link from "gatsby-link";
 import get from 'lodash/get';
 import fp from 'lodash/fp';
-import LatestBlogPosts from './latest-blog-posts';
-import LatestArticles from './latest-articles';
-import LatestResources from './resource-list';
+//import LatestBlogPosts from './latest-blog-posts';
+//import LatestArticles from './latest-articles';
 
 class BlogIndex extends React.Component {
 
   render() {
-    const resourceList = get(this, 'props.data.resources.edges')
-    const portfolios = fp.filter(fp.flow(
-      fp.get('node.frontmatter.type'),
-      fp.isEqual('res')
-    ))(resourceList);
-    console.log(portfolios);
+   const latestArticles =  this.props.data.latestArticles.edges;
     return (
       <div>
-        <LatestArticles articles={this.props.data.latestArticles.edges} />
-        <LatestBlogPosts posts={this.props.data.latestBlogs.edges} />
-        {/* <LatestResources /> */}
+        {/* <LatestArticles articles={this.props.data.latestArticles.edges} />
+        <LatestBlogPosts posts={this.props.data.latestBlogs.edges} /> */}
+
+        <div className="sub-title">
+          <span>Articles</span>
+        </div>
+        <div className="row">
+          {latestArticles.map(({ node }) => {
+            const title = get(node, 'frontmatter.title') || node.fields.slug
+            return (
+              <div className="col-md-4 col-sm-6" key={node.fields.slug}>
+                <div className="service-box">
+                  <div className="service-icon">
+                    <i className="fa fa-cogs"></i>
+                  </div>
+                  <div className="service-content">
+                    <h4>
+                      <Link to={node.fields.slug}>
+                        {title}
+                      </Link>
+                    </h4>
+                    <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        <div className="mb-40"></div>
+          
+          
+
       </div>
     )
   }
@@ -38,7 +61,6 @@ export const query = graphql`
         node {
           excerpt(pruneLength: 100)
           frontmatter {
-            type
             title
             date(formatString: "MMMM DD, YYYY")
           }
@@ -49,47 +71,6 @@ export const query = graphql`
       }
     }
     
-    latestBlogs: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }, 
-      filter: {fileAbsolutePath: {regex: "/(latest-blogs)/.*\\.md$/"}}
-      ) {
-      edges {
-        node {
-          excerpt(pruneLength: 100)
-          frontmatter {
-            type
-            title
-            date(formatString: "MMMM DD, YYYY")
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-
-    resources: allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }, 
-      filter: {fileAbsolutePath: {regex: "/(resources)/.*\\.md$/"}}
-      ) {
-      edges {
-        node {
-          excerpt(pruneLength: 100)
-          frontmatter {
-            type
-            title
-            date(formatString: "MMMM DD, YYYY")
-            category
-            
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-
-
-
+        
   }
 `
